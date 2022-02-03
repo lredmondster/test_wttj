@@ -1,0 +1,98 @@
+{
+  "extends": ["airbnb", "eslint:recommended", "prettier", "next"],
+  "plugins": ["@typescript-eslint", "json"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.js", "*.jsx", "*.json", "*.tsx"],
+      "rules": {}
+    }
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "rules": {
+    "no-import-assign": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/static-property-placement": "off",
+    "arrow-body-style": "off",
+    "react/forbid-prop-types": "off",
+    "react/no-danger": "off",
+    "prefer-object-spread": "off",
+    "import/extensions": "off",
+    "prefer-arrow-callback": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "react/destructuring-assignment": "off",
+    "react/jsx-curly-brace-presence": "off",
+    "react/function-component-definition": "off",
+    "no-restricted-exports": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "comma-dangle": 2,
+    "eol-last": 1,
+    "func-names": 0,
+    "quotes": [2, "double", { "avoidEscape": true }],
+    "react/react-in-jsx-scope": 0,
+    "no-redeclare": 1,
+    "jsx-a11y/anchor-is-valid": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "import/no-unresolved": ["error", { "ignore": ["^@"] }],
+    "import/no-extraneous-dependencies": 0,
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "required": {
+          "every": ["id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": ["label"],
+        "labelAttributes": ["htmlFor"],
+        "controlComponents": ["input"]
+      }
+    ],
+    "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error"
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["@components", "./src/components"]],
+        "extensions": [".ts", ".json", ".tsx"]
+      }
+    }
+  }
+}
