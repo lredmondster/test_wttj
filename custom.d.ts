@@ -18,8 +18,13 @@ declare module "*.png" {
   const content: any;
   export default content;
 }
-declare module "@welcome-ui/box" {
+declare module "@welcome-ui/*" {
   import { ComponentType } from "react";
+  const WuiProvider: ComponentType<any>;
+  const createTheme: any;
   const Box: ComponentType<any>;
-  export { Box };
+  const Button: ComponentType<any>;
+  const Modal: any;
+  const useModalState: any;
+  export { WuiProvider, createTheme, Box, Button, Modal, useModalState };
 }
