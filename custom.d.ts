@@ -24,7 +24,8 @@ declare module "@welcome-ui/*" {
   const createTheme: any;
   const Box: ComponentType<any>;
   const Button: ComponentType<any>;
+  const Text: ComponentType<any>;
   const Modal: any;
   const useModalState: any;
-  export { WuiProvider, createTheme, Box, Button, Modal, useModalState };
+  export { WuiProvider, createTheme, Box, Button, Text, Modal, useModalState };
 }

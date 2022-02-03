@@ -38,7 +38,7 @@ const SearchBarAndFilters = ({ jobs, setFilteredJobs }) => {
                 id="search"
                 name="search"
                 placeholder="Search"
-                value={jobValue.length ? jobValue : null}
+                value={jobValue.length ? jobValue : undefined}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setJobValue(e.target.value)
                 }
