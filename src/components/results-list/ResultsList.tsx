@@ -1,29 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Box } from "@welcome-ui/box";
-import { Button } from "@welcome-ui/button";
-import { Modal, useModalState } from "@welcome-ui/modal";
-import { useRouter } from "next/router";
+
 import { Text } from "@welcome-ui/text";
 import { Pagination } from "@welcome-ui/pagination";
 import { Link } from "@welcome-ui/link";
+import { WriteIcon } from "@welcome-ui/icons.write";
+import { DateIcon } from "@welcome-ui/icons.date";
+import { LocationIcon } from "@welcome-ui/icons.location";
 
-const AModal = ({ job, slug }: { job: any; slug: any }) => {
-  const modal = useModalState({ visible: slug === job.slug });
-
-  return (
-    <>
-      <Modal.Trigger as={Button} {...modal}>
-        See More
-      </Modal.Trigger>
-      <Modal {...modal} ariaLabel="example">
-        <Modal.Title>Nullam non lacinia</Modal.Title>
-        <Modal.Content p="xxl">
-          <div>{job.profile}</div>
-        </Modal.Content>
-      </Modal>
-    </>
-  );
-};
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
 
 // in miliseconds
 const units: { [unit: string]: number } = {
@@ -55,9 +46,6 @@ const ResultsList = ({
   organizationName: any;
   slug: any;
 }) => {
-  const router = useRouter();
-  console.log("locale", router.locale);
-
   const [page, setPage] = useState(0);
 
   const amtOfPages = Math.ceil(jobs.length / pagination);
@@ -93,8 +81,11 @@ const ResultsList = ({
             <Box backgroundColor="light.900" margin="md" key={job.id}>
               <Text>{organizationName}</Text>
               <Text>{job.name}</Text>
+              <WriteIcon />
               <Text>{job.contract_type.en}</Text>
+              <LocationIcon />
               <Text>{job.office.name}</Text>
+              <DateIcon />
               <Text>{calculateNbrOfDays}</Text>
               <AModal slug={slug} job={job} />
               {site?.url && (

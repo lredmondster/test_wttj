@@ -32,3 +32,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+ALL THE FEATURES
+
+1 - Project completely boilerplated with TypeScript, linter, pre-comit
+1 - SSR with ISG at 60 seconds
+2 - ROUTING WITH SLUG OF JOB shallow rendered
+3 - I18N with 5 locales managed, defaulting to French
+
+RAF:
+
+- CLEAN UP PROJECT (CONSTANT FILE, PROPER FOLDER STRUCTURE, HELPER FILE, UTIL FILE)
+- TYPE EVERYTHING
+- INSTALL RTL
+- IF TIME, THEME THE HELL OUT
+- WRITE UP README
+- LOCALE PARSING

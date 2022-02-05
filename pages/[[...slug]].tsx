@@ -11,16 +11,14 @@ import { useTranslation } from "next-i18next";
 const Home: NextPage<{ jobs: any }> = ({
   jobs,
   organizationName,
-  slug,
 }: {
   jobs: any;
   organizationName: any;
-  slug: any;
 }) => {
   const [filteredJobs, setFilteredJobs] = useState(jobs);
+  const [pagination, setPagination] = useState(25);
 
   const { t } = useTranslation("common");
-  const pagination = 25;
 
   console.log(t("test"));
 
@@ -35,10 +33,15 @@ const Home: NextPage<{ jobs: any }> = ({
       alignItems="center"
       backgroundColor="nude.100"
     >
-      <SearchBarAndFilters jobs={jobs} setFilteredJobs={setFilteredJobs} />
+      <SearchBarAndFilters
+        pagination={pagination}
+        setPagination={setPagination}
+        jobs={jobs}
+        filteredJobs={filteredJobs}
+        setFilteredJobs={setFilteredJobs}
+      />
       <ResultsList
-        pagination={25}
-        slug={slug}
+        pagination={pagination}
         organizationName={organizationName}
         jobs={filteredJobs}
       />
@@ -47,8 +50,6 @@ const Home: NextPage<{ jobs: any }> = ({
 };
 
 export async function getStaticProps(ctx: any) {
-  const slug = ctx.params.slug ? ctx.params.slug[0] : null;
-
   const res = await fetch(
     "https://www.welcomekit.co/api/v1/embed?organization_reference=Pg4eV6k",
   );
@@ -59,7 +60,6 @@ export async function getStaticProps(ctx: any) {
       ...(await serverSideTranslations(ctx.locale, ["common"])),
       organizationName,
       jobs,
-      slug,
     },
     revalidate: 60,
   };
