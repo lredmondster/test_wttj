@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Box } from "@welcome-ui/box";
+import JobDescription from "./job-description/JobDescription";
 
 import { Text } from "@welcome-ui/text";
 import { Pagination } from "@welcome-ui/pagination";
@@ -7,34 +8,7 @@ import { Link } from "@welcome-ui/link";
 import { WriteIcon } from "@welcome-ui/icons.write";
 import { DateIcon } from "@welcome-ui/icons.date";
 import { LocationIcon } from "@welcome-ui/icons.location";
-
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-  return ref.current;
-}
-
-// in miliseconds
-const units: { [unit: string]: number } = {
-  year: 24 * 60 * 60 * 1000 * 365,
-  month: (24 * 60 * 60 * 1000 * 365) / 12,
-  day: 24 * 60 * 60 * 1000,
-  hour: 60 * 60 * 1000,
-  minute: 60 * 1000,
-  second: 1000,
-};
-
-const rtf = new Intl.RelativeTimeFormat("fr", { numeric: "always" });
-
-const getRelativeTime = (d1: Date, d2 = new Date()) => {
-  const elapsed = d1.getTime() - d2.getTime();
-
-  for (var u in units)
-    if (Math.abs(elapsed) > units[u] || u == "second")
-      return rtf.format(Math.round(elapsed / units[u]), u);
-};
+import getRelativeTime from "@utils/getRelativeTime";
 
 const ResultsList = ({
   jobs,
@@ -87,7 +61,7 @@ const ResultsList = ({
               <Text>{job.office.name}</Text>
               <DateIcon />
               <Text>{calculateNbrOfDays}</Text>
-              <AModal slug={slug} job={job} />
+              <JobDescription slug={slug} job={job} />
               {site?.url && (
                 <Link href={site.url} target="_blank">
                   Apply

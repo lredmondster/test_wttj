@@ -17,7 +17,11 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@mocks/*": ["__mocks__/*"]
+      "@constants/*": ["src/constants/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"],
+      "@mocks/*": ["__mocks__/*"],
+      "@locales/*": ["public/locales/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "custom.d.ts"],

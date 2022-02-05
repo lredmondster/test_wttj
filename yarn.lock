@@ -4676,7 +4676,7 @@ i18next-fs-backend@^1.0.7:
   resolved "https://registry.yarnpkg.com/i18next-fs-backend/-/i18next-fs-backend-1.1.4.tgz#d0e9b9ed2fa7a0f11002d82b9fa69c3c3d6482da"
   integrity sha512-/MfAGMP0jHonV966uFf9PkWWuDjPYLIcsipnSO3NxpNtAgRUKLTwvm85fEmsF6hGeu0zbZiCQ3W74jwO6K9uXA==
 
-i18next@^21.5.3:
+i18next@^21.5.3, i18next@^21.6.10:
   version "21.6.10"
   resolved "https://registry.yarnpkg.com/i18next/-/i18next-21.6.10.tgz#aa503831d42213ae2f05eaede29ca07c2d6fbb6f"
   integrity sha512-Xw+tEGQ61BF6SXtBlFffhM/YhJKHZf2cyDrcNK/l2dE6yVbkPkSasC3VhkAsHXX30vUJ0yG04WIUtf7UvwjOxg==
@@ -5667,6 +5667,11 @@ next-i18next@^10.2.0:
     i18next-fs-backend "^1.0.7"
     react-i18next "^11.8.13"
 
+next-router-mock@^0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.6.5.tgz#46258e1921587a892e29a3052cb0daa2cc503185"
+  integrity sha512-gh6phWv4YUhFON0rWGmc02ni91m68ICG1HTj2N9bi2Y0MIlp5Z12QITXF4lNtV33wuMeUzrs/Ik6XyNOZ8rmNQ==
+
 next@12.0.10:
   version "12.0.10"
   resolved "https://registry.yarnpkg.com/next/-/next-12.0.10.tgz#fcc4584177418bd777ce157f3165b7ba5e7708f7"
@@ -6021,7 +6026,7 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-i18next@^11.8.13:
+react-i18next@^11.15.3, react-i18next@^11.8.13:
   version "11.15.3"
   resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-11.15.3.tgz#7608fb3cacc02ac75a62fc2d68b579f140b198dd"
   integrity sha512-RSUEM4So3Tu2JHV0JsZ5Yje+4nz66YViMfPZoywxOy0xyn3L7tE2CHvJ7Y9LUsrTU7vGmZ5bwb8PpjnkatdIxg==

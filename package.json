@@ -28,11 +28,13 @@
     "@xstyled/styled-components": "^3.5.1",
     "@xstyled/system": "^3.5.1",
     "formik": "^2.2.9",
+    "i18next": "^21.6.10",
     "next": "12.0.10",
     "next-i18next": "^10.2.0",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^11.15.3",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
@@ -50,6 +52,7 @@
     "husky": "^7.0.0",
     "jest": "^27.5.0",
     "lint-staged": "^12.3.3",
+    "next-router-mock": "^0.6.5",
     "prettier": "^2.5.1",
     "typescript": "4.5.5"
   },

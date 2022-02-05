@@ -1,10 +1,11 @@
-import { useEffect, useState, useRef } from "react";
+import usePrevious from "@hooks/usePrevious";
+import { useEffect } from "react";
 
 import { Button } from "@welcome-ui/button";
 import { Modal, useModalState } from "@welcome-ui/modal";
 import { useRouter } from "next/router";
 
-const AModal = ({ job }: { job: any }) => {
+const JobDescription = ({ job }: { job: any }) => {
   const router = useRouter();
   const { slug } = router.query;
   const prevSlug = usePrevious(slug);
@@ -48,3 +49,5 @@ const AModal = ({ job }: { job: any }) => {
     </>
   );
 };
+
+export default JobDescription;
