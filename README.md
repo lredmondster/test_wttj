@@ -39,6 +39,7 @@ ALL THE FEATURES
 1 - SSR with ISG at 60 seconds
 2 - ROUTING WITH SLUG OF JOB shallow rendered
 3 - I18N with 5 locales managed, defaulting to French
+4 - DropDownMenu with multiselect checkboxes and numberCount
 
 RAF:
 

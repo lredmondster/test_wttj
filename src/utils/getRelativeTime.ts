@@ -13,9 +13,13 @@ const rtf = new Intl.RelativeTimeFormat("fr", { numeric: "always" });
 const getRelativeTime = (d1: Date, d2 = new Date()) => {
   const elapsed = d1.getTime() - d2.getTime();
 
-  for (var u in units)
-    if (Math.abs(elapsed) > units[u] || u == "second")
-      return rtf.format(Math.round(elapsed / units[u]), u);
+  for (const [unit, number] of Object.entries(units)) {
+    if (Math.abs(elapsed) > number || unit == "second")
+      return rtf.format(
+        Math.round(elapsed / number),
+        unit as Intl.RelativeTimeFormatUnit,
+      );
+  }
 };
 
 export default getRelativeTime;

@@ -24,8 +24,36 @@ declare module "@welcome-ui/*" {
   const createTheme: any;
   const Box: ComponentType<any>;
   const Button: ComponentType<any>;
+  const Pagination: ComponentType<any>;
   const Text: ComponentType<any>;
+  const Accordion: ComponentType<any>;
+
+  const Checkbox: ComponentType<any>;
+  const Link: ComponentType<any>;
+  const WriteIcon: ComponentType<any>;
+  const LocationIcon: ComponentType<any>;
+  const DateIcon: ComponentType<any>;
   const Modal: any;
   const useModalState: any;
-  export { WuiProvider, createTheme, Box, Button, Text, Modal, useModalState };
+  const DropdownMenu: any;
+  const useDropdownMenuState: any;
+
+  export {
+    WuiProvider,
+    createTheme,
+    Box,
+    Button,
+    Checkbox,
+    Link,
+    Pagination,
+    Text,
+    Modal,
+    useModalState,
+    DropdownMenu,
+    useDropdownMenuState,
+    WriteIcon,
+    LocationIcon,
+    DateIcon,
+    Accordion,
+  };
 }

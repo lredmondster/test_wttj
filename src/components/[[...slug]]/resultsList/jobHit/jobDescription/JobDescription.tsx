@@ -1,9 +1,9 @@
-import usePrevious from "@hooks/usePrevious";
 import { useEffect } from "react";
-
-import { Button } from "@welcome-ui/button";
-import { Modal, useModalState } from "@welcome-ui/modal";
 import { useRouter } from "next/router";
+import { Modal, useModalState } from "@welcome-ui/modal";
+import { Button } from "@welcome-ui/button";
+
+import usePrevious from "@hooks/usePrevious";
 
 const JobDescription = ({ job }: { job: any }) => {
   const router = useRouter();
