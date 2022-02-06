@@ -37,9 +37,13 @@ const GroupByFilters = ({
   return (
     <>
       <DropdownMenu.Trigger {...menu} as={Button}>
-        Dropdown Menu MENU MENU MENU
+        Group By
       </DropdownMenu.Trigger>
-      <DropdownMenu {...menu} aria-label="Example">
+      <DropdownMenu
+        {...menu}
+        aria-label="Example"
+        data-testid="dropdown-menu-open"
+      >
         {DropDownHeadersWithFilters.map(
           ({ label, values, state, setState }) => (
             <Box key={label}>

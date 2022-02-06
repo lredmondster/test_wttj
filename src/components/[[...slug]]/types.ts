@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export type JobsEntity = {
   id: number;
   reference: string;

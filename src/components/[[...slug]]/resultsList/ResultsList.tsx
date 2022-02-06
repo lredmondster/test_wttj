@@ -3,6 +3,7 @@ import { Box } from "@welcome-ui/box";
 import { Pagination } from "@welcome-ui/pagination";
 
 import type { JobsEntity } from "@components/[[...slug]]/types";
+
 import JobHit from "./jobHit";
 
 const ResultsList = ({

@@ -16,7 +16,8 @@ const getGroupByFilters = (
     if (
       !job.name.includes(jobSearchValue) ||
       allOtherFilters.some(
-        ({ state, key }) => state.length > 0 && !state.includes(job[key].name),
+        ({ state, key }) =>
+          state.length > 0 && !state.includes((job as any)[key].name),
       )
     ) {
       return groupByFilters;
@@ -25,16 +26,16 @@ const getGroupByFilters = (
     if (
       Object.prototype.hasOwnProperty.call(
         groupByFilters,
-        job[currentFilter.key].name,
+        (job as any)[currentFilter.key].name,
       )
     ) {
       return {
         ...groupByFilters,
-        [job[currentFilter.key].name]:
-          groupByFilters[job[currentFilter.key].name] + 1,
+        [(job as any)[currentFilter.key].name]:
+          (groupByFilters as any)[(job as any)[currentFilter.key].name] + 1,
       };
     }
-    return { ...groupByFilters, [job[currentFilter.key].name]: 1 };
+    return { ...groupByFilters, [(job as any)[currentFilter.key].name]: 1 };
   }, {});
 };
 

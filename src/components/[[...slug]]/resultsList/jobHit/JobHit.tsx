@@ -23,7 +23,7 @@ const JobHit = ({
     site => site.website_reference === "wttj_fr",
   );
   return (
-    <Box backgroundColor="light.900" margin="md">
+    <Box backgroundColor="light.900" margin="md" data-testid="JobHit">
       <Text>{organizationName}</Text>
       <Text>{job.name}</Text>
       <WriteIcon />

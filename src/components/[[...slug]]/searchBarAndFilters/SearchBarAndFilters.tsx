@@ -7,6 +7,7 @@ import { Select, OptionValue } from "@welcome-ui/select";
 import { Label } from "@welcome-ui/label";
 
 import type { JobsEntity } from "@components/[[...slug]]/types";
+
 import GroupByFilters from "./groupByFilters";
 
 const paginationOptions = [10, 25, 50, 100].map(val => ({
@@ -54,7 +55,8 @@ const SearchBarAndFilters = ({
       job =>
         job.name.includes(jobSearchValue) &&
         dropDownHeaders.every(
-          ({ key, state }) => !state.length || state.includes(job[key].name),
+          ({ key, state }) =>
+            !state.length || state.includes((job as any)[key].name),
         ),
     );
     setFilteredJobs(filteredJobValues);
@@ -85,7 +87,7 @@ const SearchBarAndFilters = ({
                 id="search"
                 name="search"
                 placeholder="Search"
-                value={jobSearchValue.length ? jobSearchValue : undefined}
+                value={jobSearchValue}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setJobSearchValue(e.target.value)
                 }
@@ -96,7 +98,8 @@ const SearchBarAndFilters = ({
                 dropDownHeaders={dropDownHeaders}
               />
               <Label>Pagination</Label>
-              <Select
+              <Field
+                as={Select}
                 options={paginationOptions}
                 id="pagination-select"
                 name="pagination-select"

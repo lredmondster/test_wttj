@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import parse from "html-react-parser";
+import { Box } from "@welcome-ui/box";
+import { Text } from "@welcome-ui/text";
 import { Modal, useModalState } from "@welcome-ui/modal";
 import { Button } from "@welcome-ui/button";
 
@@ -34,16 +37,19 @@ const JobDescription = ({ job }: { job: any }) => {
       </Modal.Trigger>
       <Modal
         {...modal}
-        ariaLabel="example"
+        ariaLabel="job-description"
         onClose={() => {
           router.push("", undefined, {
             shallow: true,
           });
         }}
       >
-        <Modal.Title>Nullam non lacinia</Modal.Title>
-        <Modal.Content p="xxl">
-          <div>{job.profile}</div>
+        <Modal.Title>{job.name}</Modal.Title>
+        <Modal.Content p="md">
+          <Text>Description</Text>
+          <Box>{parse(job.profile)}</Box>
+          <Text>Recruitment Process</Text>
+          <Box>{parse(job.recruitment_process)}</Box>
         </Modal.Content>
       </Modal>
     </>
