@@ -1,24 +1,31 @@
 import type {
   JobsEntity,
-  DropDownHeaderEntity,
+  SearchAndFilters,
+  GroupByFiltersMappingEntity,
 } from "@components/[[...slug]]/types";
 
 const getGroupByFilters = (
   jobs: JobsEntity[],
-  jobSearchValue: string,
-  currentFilter: DropDownHeaderEntity,
-  allFilters: DropDownHeaderEntity[],
+  searchAndFilters: SearchAndFilters,
+  currentFilter: GroupByFiltersMappingEntity,
+  allFilters: GroupByFiltersMappingEntity[],
 ) => {
+  const { jobSearchValue } = searchAndFilters;
+
   const allOtherFilters = allFilters.filter(
-    ({ key }) => key !== currentFilter.key,
+    ({ keyInStore }) => keyInStore !== currentFilter.keyInStore,
   );
   return jobs.reduce((groupByFilters, job) => {
     if (
       !job.name.includes(jobSearchValue) ||
-      allOtherFilters.some(
-        ({ state, key }) =>
-          state.length > 0 && !state.includes((job as any)[key].name),
-      )
+      allOtherFilters.some(({ keyInStore, keyInApi }) => {
+        return (
+          (searchAndFilters as any)[keyInStore].length > 0 &&
+          !(searchAndFilters as any)[keyInStore].includes(
+            (job as any)[keyInApi].name,
+          )
+        );
+      })
     ) {
       return groupByFilters;
     }
@@ -26,16 +33,20 @@ const getGroupByFilters = (
     if (
       Object.prototype.hasOwnProperty.call(
         groupByFilters,
-        (job as any)[currentFilter.key].name,
+        (job as any)[currentFilter.keyInApi].name,
       )
     ) {
       return {
         ...groupByFilters,
-        [(job as any)[currentFilter.key].name]:
-          (groupByFilters as any)[(job as any)[currentFilter.key].name] + 1,
+        [(job as any)[currentFilter.keyInApi].name]:
+          (groupByFilters as any)[(job as any)[currentFilter.keyInApi].name] +
+          1,
       };
     }
-    return { ...groupByFilters, [(job as any)[currentFilter.key].name]: 1 };
+    return {
+      ...groupByFilters,
+      [(job as any)[currentFilter.keyInApi].name]: 1,
+    };
   }, {});
 };
 

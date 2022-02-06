@@ -62,9 +62,15 @@ export type WebsitesEntity = {
   organization_url: string;
 };
 
-export type DropDownHeaderEntity = {
-  key: string;
+export type SearchAndFilters = {
+  jobSearchValue: string;
+  filterByOffices: string[];
+  filterByDepartments: string[];
+};
+
+export type GroupByFiltersMappingEntity = {
+  keyInStore: string;
+  keyInApi: string;
   label: string;
-  state: string[];
-  setState: (val: string[] | ((val: string[]) => string[])) => void;
+  type: string;
 };

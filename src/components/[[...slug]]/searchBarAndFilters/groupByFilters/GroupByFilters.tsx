@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch } from "react";
 import { Field } from "formik";
 import { Box } from "@welcome-ui/box";
 import { DropdownMenu, useDropdownMenuState } from "@welcome-ui/dropdown-menu";
@@ -10,27 +10,27 @@ import { Checkbox } from "@welcome-ui/checkbox";
 
 import type {
   JobsEntity,
-  DropDownHeaderEntity,
+  SearchAndFilters,
 } from "@components/[[...slug]]/types";
-import toggleElementInArray from "@utils/toggleElementInArray";
+import GROUP_BY_FILTERS_MAPPING from "@constants/groupByFiltersMapping";
 
 import getGroupByFilters from "./helpers";
 
 const GroupByFilters = ({
   jobs,
-  jobSearchValue,
-  dropDownHeaders,
+  searchAndFilters,
+  dispatchSearchAndFilters,
 }: {
   jobs: JobsEntity[];
-  jobSearchValue: string;
-  dropDownHeaders: DropDownHeaderEntity[];
+  searchAndFilters: SearchAndFilters;
+  dispatchSearchAndFilters: Dispatch<{ type: string; payload: string }>;
 }) => {
   const menu = useDropdownMenuState({ gutter: 10, placement: "bottom-start" });
 
-  const DropDownHeadersWithFilters = dropDownHeaders.map(
+  const DropDownHeadersWithFilters = GROUP_BY_FILTERS_MAPPING.map(
     (header, _, allHeaders) => ({
       ...header,
-      values: getGroupByFilters(jobs, jobSearchValue, header, allHeaders),
+      values: getGroupByFilters(jobs, searchAndFilters, header, allHeaders),
     }),
   );
 
@@ -45,8 +45,8 @@ const GroupByFilters = ({
         data-testid="dropdown-menu-open"
       >
         {DropDownHeadersWithFilters.map(
-          ({ label, values, state, setState }) => (
-            <Box key={label}>
+          ({ label, keyInStore, type, values }) => (
+            <Box key={keyInStore}>
               <Accordion
                 as={Box}
                 title={
@@ -56,26 +56,31 @@ const GroupByFilters = ({
                 }
                 w="200px"
               >
-                {Object.entries(values).map(([valueName, valueCount]) => (
-                  <Box key={valueName} display="flex">
-                    <Field
-                      as={Checkbox}
-                      checked={state.includes(valueName)}
-                      backgroundColor="nude.100"
-                      value={valueName}
-                      name={valueName}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        setState((oldFilterArray: string[]) =>
-                          toggleElementInArray(oldFilterArray, e.target.value),
-                        )
-                      }
-                    />
-                    <Label>
-                      {valueName}
-                      <Text>{valueCount}</Text>
-                    </Label>
-                  </Box>
-                ))}
+                {Object.entries(values)
+                  .sort()
+                  .map(([valueName, valueCount]) => (
+                    <Box key={`${keyInStore}${valueName}`} display="flex">
+                      <Field
+                        as={Checkbox}
+                        checked={(searchAndFilters as any)[keyInStore].includes(
+                          valueName,
+                        )}
+                        backgroundColor="nude.100"
+                        value={valueName}
+                        name={valueName}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          dispatchSearchAndFilters({
+                            type,
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                      <Label>
+                        {valueName}
+                        <Text>{valueCount}</Text>
+                      </Label>
+                    </Box>
+                  ))}
               </Accordion>
             </Box>
           ),

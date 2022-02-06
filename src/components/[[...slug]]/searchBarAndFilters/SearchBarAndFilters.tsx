@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useReducer, ChangeEvent } from "react";
 import Image from "next/image";
 import { Formik, Form, Field } from "formik";
 import { Box } from "@welcome-ui/box";
@@ -7,7 +7,9 @@ import { Select, OptionValue } from "@welcome-ui/select";
 import { Label } from "@welcome-ui/label";
 
 import type { JobsEntity } from "@components/[[...slug]]/types";
+import GROUP_BY_FILTERS_MAPPING from "@constants/groupByFiltersMapping";
 
+import { reducer, initialState } from "./reducer";
 import GroupByFilters from "./groupByFilters";
 
 const paginationOptions = [10, 25, 50, 100].map(val => ({
@@ -26,41 +28,26 @@ const SearchBarAndFilters = ({
   itemsPerPage: number;
   setItemsPerPage: (itemsPerPage: number) => void;
 }) => {
-  const [jobSearchValue, setJobSearchValue] = useState("");
-  const [filterByOffices, setFilterByOffices] = useState([]);
-  const [filterByDepartments, setFilterByDepartments] = useState([]);
-
-  // TO GET RID OF WHEN TIME, DISGUSTING
-  const dropDownHeaders = [
-    {
-      key: "office",
-      label: "Offices",
-      state: filterByOffices as string[],
-      setState: setFilterByOffices as (
-        val: string[] | ((val: string[]) => string[]),
-      ) => void,
-    },
-    {
-      key: "department",
-      label: "Departments",
-      state: filterByDepartments as string[],
-      setState: setFilterByDepartments as (
-        val: string[] | ((val: string[]) => string[]),
-      ) => void,
-    },
-  ];
+  const [searchAndFilters, dispatchSearchAndFilters] = useReducer(
+    reducer,
+    initialState,
+  );
 
   useEffect(() => {
+    const { jobSearchValue } = searchAndFilters;
     const filteredJobValues = jobs.filter(
       job =>
         job.name.includes(jobSearchValue) &&
-        dropDownHeaders.every(
-          ({ key, state }) =>
-            !state.length || state.includes((job as any)[key].name),
+        GROUP_BY_FILTERS_MAPPING.every(
+          ({ keyInStore, keyInApi }) =>
+            !(searchAndFilters as any)[keyInStore].length ||
+            (searchAndFilters as any)[keyInStore].includes(
+              (job as any)[keyInApi].name,
+            ),
         ),
     );
     setFilteredJobs(filteredJobValues);
-  }, [jobSearchValue, filterByOffices, filterByDepartments]);
+  }, [searchAndFilters]);
 
   return (
     <Box
@@ -87,15 +74,18 @@ const SearchBarAndFilters = ({
                 id="search"
                 name="search"
                 placeholder="Search"
-                value={jobSearchValue}
+                value={searchAndFilters.jobSearchValue}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setJobSearchValue(e.target.value)
+                  dispatchSearchAndFilters({
+                    type: "SET_JOB_SEARCH_VALUE",
+                    payload: e.target.value,
+                  })
                 }
               />
               <GroupByFilters
                 jobs={jobs}
-                jobSearchValue={jobSearchValue}
-                dropDownHeaders={dropDownHeaders}
+                searchAndFilters={searchAndFilters}
+                dispatchSearchAndFilters={dispatchSearchAndFilters}
               />
               <Label>Pagination</Label>
               <Field
