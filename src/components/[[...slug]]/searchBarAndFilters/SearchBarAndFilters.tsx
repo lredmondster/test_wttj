@@ -2,9 +2,11 @@ import { useEffect, useReducer, ChangeEvent } from "react";
 import Image from "next/image";
 import { Formik, Form, Field } from "formik";
 import { Box } from "@welcome-ui/box";
+import { Button } from "@welcome-ui/button";
 import { InputText } from "@welcome-ui/input-text";
 import { Select, OptionValue } from "@welcome-ui/select";
 import { Label } from "@welcome-ui/label";
+import { SearchIcon } from "@welcome-ui/icons.search";
 
 import type { JobsEntity } from "@components/[[...slug]]/types";
 import GROUP_BY_FILTERS_MAPPING from "@constants/groupByFiltersMapping";
@@ -52,11 +54,16 @@ const SearchBarAndFilters = ({
   return (
     <Box
       display="flex"
+      flexDirection="column"
       w={1}
       justifyContent="center"
       alignItems="center"
       padding="md"
       backgroundColor="light.900"
+      borderBottom="solid"
+      borderColor="primary.100"
+      borderWidth={2}
+      boxShadow="sm"
     >
       <Image
         width={250}
@@ -65,13 +72,17 @@ const SearchBarAndFilters = ({
         alt="Welcome to the Jungle Logo"
         src="https://cdn.welcometothejungle.com/wttj-front/production/assets/images/logos/wttj.svg?v=b8e771a8e9f1e6330aad9763b4f396da"
       />
-      <Box display="flex">
-        <Formik initialValues={{}} onSubmit={() => {}}>
-          {() => (
-            <Form>
+      <Formik initialValues={{}} onSubmit={() => {}}>
+        {() => (
+          <Form>
+            <Label>Your dream job?</Label>
+            <Box display="flex" paddingBottom={15}>
               <Field
                 as={InputText}
                 id="search"
+                icon={<SearchIcon />}
+                w={300}
+                marginRight={5}
                 name="search"
                 placeholder="Search"
                 value={searchAndFilters.jobSearchValue}
@@ -87,21 +98,39 @@ const SearchBarAndFilters = ({
                 searchAndFilters={searchAndFilters}
                 dispatchSearchAndFilters={dispatchSearchAndFilters}
               />
-              <Label>Pagination</Label>
-              <Field
-                as={Select}
-                options={paginationOptions}
-                id="pagination-select"
-                name="pagination-select"
-                value={itemsPerPage}
-                onChange={(val: OptionValue | OptionValue[]) => {
-                  setItemsPerPage(val as number);
-                }}
-              />
-            </Form>
-          )}
-        </Formik>
-      </Box>
+            </Box>
+            <Box
+              display="flex"
+              marginLeft="auto"
+              justifyContent="flex-end"
+              alignItems="flex-end"
+            >
+              <Button
+                paddingRight={20}
+                variant="quaternary"
+                onClick={() =>
+                  dispatchSearchAndFilters({ type: "RESET_ALL", payload: "" })
+                }
+              >
+                Clear all
+              </Button>
+              <Box w={75}>
+                <Label>Pagination</Label>
+                <Field
+                  as={Select}
+                  options={paginationOptions}
+                  id="pagination-select"
+                  name="pagination-select"
+                  value={itemsPerPage}
+                  onChange={(val: OptionValue | OptionValue[]) => {
+                    setItemsPerPage(val as number);
+                  }}
+                />
+              </Box>
+            </Box>
+          </Form>
+        )}
+      </Formik>
     </Box>
   );
 };

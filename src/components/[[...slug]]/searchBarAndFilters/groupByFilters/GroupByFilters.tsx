@@ -36,7 +36,7 @@ const GroupByFilters = ({
 
   return (
     <>
-      <DropdownMenu.Trigger {...menu} as={Button}>
+      <DropdownMenu.Trigger {...menu} as={Button} variant="secondary">
         Group By
       </DropdownMenu.Trigger>
       <DropdownMenu

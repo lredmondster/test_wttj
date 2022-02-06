@@ -18,6 +18,7 @@
     "@welcome-ui/dropdown-menu": "^3.4.3",
     "@welcome-ui/icons": "^3.13.1",
     "@welcome-ui/icons.font": "^3.13.1",
+    "@welcome-ui/icons.search": "^3.0.0",
     "@welcome-ui/input-text": "4.0.0-alpha.17",
     "@welcome-ui/label": "4.0.0-alpha.16",
     "@welcome-ui/link": "^3.0.0",

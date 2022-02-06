@@ -27,12 +27,13 @@ declare module "@welcome-ui/*" {
   const Pagination: ComponentType<any>;
   const Text: ComponentType<any>;
   const Accordion: ComponentType<any>;
-
   const Checkbox: ComponentType<any>;
   const Link: ComponentType<any>;
   const WriteIcon: ComponentType<any>;
   const LocationIcon: ComponentType<any>;
   const DateIcon: ComponentType<any>;
+  const OfficeIcon: ComponentType<any>;
+  const SearchIcon: ComponentType<any>;
   const Modal: any;
   const useModalState: any;
   const DropdownMenu: any;
@@ -54,6 +55,8 @@ declare module "@welcome-ui/*" {
     WriteIcon,
     LocationIcon,
     DateIcon,
+    OfficeIcon,
+    SearchIcon,
     Accordion,
   };
 }

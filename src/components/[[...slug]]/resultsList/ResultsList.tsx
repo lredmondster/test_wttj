@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box } from "@welcome-ui/box";
+import { Text } from "@welcome-ui/text";
 import { Pagination } from "@welcome-ui/pagination";
 
 import type { JobsEntity } from "@components/[[...slug]]/types";
@@ -37,7 +38,7 @@ const ResultsList = ({
       overflow="hidden"
     >
       <Box w={"70%"} display="flex" flexDirection="column" overflow="auto">
-        {currentJobArray.map((job: any) => {
+        {currentJobArray.map((job: JobsEntity) => {
           return (
             <JobHit
               key={job.id}
@@ -46,12 +47,18 @@ const ResultsList = ({
             />
           );
         })}
-        <Pagination
-          aria-label="Pagination"
-          page={page + 1}
-          onChange={(val: number) => setPage(val - 1)}
-          pageCount={amtOfPages}
-        />
+        {currentJobArray.length ? (
+          <Pagination
+            aria-label="Pagination"
+            margin="auto"
+            paddingBottom={15}
+            page={page + 1}
+            onChange={(val: number) => setPage(val - 1)}
+            pageCount={amtOfPages}
+          />
+        ) : (
+          <Text>Ooops no results</Text>
+        )}
       </Box>
     </Box>
   );
